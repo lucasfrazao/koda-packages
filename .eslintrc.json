@@ -4,20 +4,5 @@
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": "latest"
-  },
-  "rules": {
-    "no-unused-vars": "warn",
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto",
-        "arrowParens": "always",
-        "printWidth": 80,
-        "singleQuote": true,
-        "trailingComma": "all",
-        "semi": false,
-        "tabWidth": 2
-      }
-    ]
   }
 }
