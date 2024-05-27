@@ -1,8 +1,10 @@
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { getPackage } from '@/api/get-package'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useMutation } from '@tanstack/react-query'
 
 const searchForm = z.object({
   search: z.string(),
@@ -17,8 +19,17 @@ export function Home() {
     },
   })
 
-  const handleSearch = (data: SearchForm) => {
-    console.log(data)
+  const { mutateAsync: fetchPackage } = useMutation({
+    mutationFn: getPackage,
+  })
+
+  const handleSearch = async (data: SearchForm) => {
+    try {
+      const response = await fetchPackage({ text: data.search })
+      console.log('response', response)
+    } catch (error) {
+      console.error('error', error)
+    }
   }
 
   return (
