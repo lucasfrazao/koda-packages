@@ -30,7 +30,7 @@ export interface GetPackagesBody {
 }
 
 export async function getPackages({ text }: GetPackagesBody) {
-  const response = await api.get<GetPackagesResponse>('/search', {
+  const response = await api.get<GetPackagesResponse>('/-/v1/search', {
     params: {
       text,
       popularity: 0.8,

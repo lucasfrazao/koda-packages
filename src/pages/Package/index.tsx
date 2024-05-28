@@ -1,6 +1,6 @@
-import { getPackages } from '@/api/get-packages'
+import { getPackageDetail } from '@/api/get-package-detail'
 import { useQuery } from '@tanstack/react-query'
-import { Navigate, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import { ResumePackage } from './resume-package'
 
@@ -8,19 +8,16 @@ export function Package() {
   const location = useLocation()
 
   const { data: resultPackage } = useQuery({
-    queryKey: ['detail-package', location.state],
-    queryFn: () => getPackages({ text: location.state }),
+    queryKey: ['package-detail', location.state],
+    queryFn: () => getPackageDetail(location.state),
+    retry: 2,
   })
 
-  const currentPackage = resultPackage?.objects[0]
-
-  if (!currentPackage) {
-    return <Navigate to="/" />
-  }
+  if (!resultPackage) return
 
   return (
     <div className="flex min-h-screen w-full flex-col items-center">
-      <ResumePackage packageObj={currentPackage} />
+      <ResumePackage resultPackage={resultPackage} />
     </div>
   )
 }
