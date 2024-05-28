@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { Carrot } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
 import { getPackages } from '@/api/get-packages'
@@ -15,6 +15,7 @@ const searchFormSchema = z.object({
 type SearchFormSchema = z.infer<typeof searchFormSchema>
 
 export function Home() {
+  const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
 
   const packageName = searchParams.get('packageName')
@@ -29,6 +30,12 @@ export function Home() {
     queryKey: ['packages', packageName],
     queryFn: () => getPackages({ text: packageName }),
   })
+
+  function handleRedirect(packageName: string) {
+    navigate(`/detail-package`, {
+      state: packageName,
+    })
+  }
 
   function handleFilter({ search }: SearchFormSchema) {
     if (search !== '' && search.length < 3) return
@@ -65,14 +72,23 @@ export function Home() {
         />
         <ul
           hidden={!resultPackages?.total}
-          className="absolute top-full z-10 mt-4 max-h-60 w-full overflow-auto rounded-lg border border-slate-200 p-4 shadow-sm"
+          className="absolute top-full z-10 mt-4 max-h-60 w-full overflow-auto rounded-lg border border-slate-200 shadow-sm"
         >
           {resultPackages?.objects.map((item, index) => {
+            const packageName = item.package.name
+
             return (
-              <li key={index} className="mb-2 flex justify-between">
+              <li
+                key={index}
+                className="mb-2 flex justify-between p-4 hover:bg-zinc-100"
+              >
                 <div className="flex w-full flex-col">
                   <div className="flex flex-row items-baseline gap-2">
-                    <span className="font-mono font-semibold">
+                    <span
+                      className="font-mono font-semibold hover:cursor-pointer hover:text-zinc-500"
+                      onClick={() => handleRedirect(packageName)}
+                      role="button"
+                    >
                       {item.package.name}
                     </span>
                     <span className="text-xs text-[#E4434C]">

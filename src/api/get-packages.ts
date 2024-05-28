@@ -1,19 +1,23 @@
 import { api } from '@/lib/axios'
 
-interface PackageDetails {
-  package: {
+export type Package = {
+  name: string
+  version: string
+  description: string
+  date: string
+  author: {
     name: string
-    version: string
-    description: string
-    publisher: {
-      name: string
-      email: string
-      username: string
-    }
-    author: {
-      name: string
-    }
   }
+  publisher: {
+    name: string
+    email: string
+    username: string
+  }
+  keywords: string[]
+}
+
+export interface PackageDetails {
+  package: Package
 }
 
 interface GetPackagesResponse {
@@ -29,7 +33,7 @@ export async function getPackages({ text }: GetPackagesBody) {
   const response = await api.get<GetPackagesResponse>('/search', {
     params: {
       text,
-      popularity: 0.6,
+      popularity: 0.8,
     },
   })
 
