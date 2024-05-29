@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { Carrot } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
 import { getPackages } from '@/api/get-packages'
@@ -81,14 +80,12 @@ export function Home() {
               <li
                 key={index}
                 className="mb-2 flex justify-between p-4 hover:bg-zinc-100"
+                onClick={() => handleRedirect(packageName)}
+                role="button"
               >
                 <div className="flex w-full flex-col">
                   <div className="flex flex-row items-baseline gap-2">
-                    <span
-                      className="font-mono font-semibold hover:cursor-pointer hover:text-zinc-500"
-                      onClick={() => handleRedirect(packageName)}
-                      role="button"
-                    >
+                    <span className="font-mono font-semibold">
                       {item.package.name}
                     </span>
                     <span className="text-xs text-[#E4434C]">
@@ -106,17 +103,6 @@ export function Home() {
           })}
         </ul>
       </form>
-
-      <small className="fixed bottom-2 flex flex-row items-center gap-1">
-        <span>made with love by</span>
-        <Link
-          className="font-bold hover:text-[#E4434C]"
-          to="github.com/lucasfrazao"
-        >
-          Lucas Frazao
-        </Link>
-        <Carrot size={18} />
-      </small>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { Github } from 'lucide-react'
+import { Carrot, Github } from 'lucide-react'
 import { Link, Outlet } from 'react-router-dom'
 
 export function LayoutApp() {
@@ -31,6 +31,17 @@ export function LayoutApp() {
       <div className="px-8">
         <Outlet />
       </div>
+
+      <footer className="fixed bottom-2 flex w-full flex-row items-center justify-center gap-1">
+        <span>made with love by</span>
+        <Link
+          className="font-bold hover:text-[#E4434C]"
+          to="github.com/lucasfrazao"
+        >
+          Lucas Frazao
+        </Link>
+        <Carrot size={18} />
+      </footer>
     </div>
   )
 }
