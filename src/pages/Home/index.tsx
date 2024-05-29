@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
-import { getPackages } from '@/api/get-packages'
+import { getPackages } from '@/api/node-registry/get-packages'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
@@ -30,12 +30,9 @@ export function Home() {
     queryFn: () => getPackages({ text: packageName }),
   })
 
-  function handleRedirect(packageName: string, version: string) {
+  function handleRedirect(packageName: string) {
     navigate(`/detail-package`, {
-      state: {
-        packageName,
-        version,
-      },
+      state: packageName,
     })
   }
 
@@ -73,18 +70,17 @@ export function Home() {
           {...register('search')}
         />
         <ul
-          hidden={!resultPackages?.total}
+          hidden={resultPackages && !resultPackages.objects.length}
           className="absolute top-full z-10 mt-4 max-h-60 w-full overflow-auto rounded-lg border border-slate-200 shadow-sm"
         >
           {resultPackages?.objects.map((item, index) => {
             const packageName = item.package.name
-            const version = item.package.version
 
             return (
               <li
                 key={index}
                 className="mb-2 flex justify-between p-4 hover:bg-zinc-100"
-                onClick={() => handleRedirect(packageName, version)}
+                onClick={() => handleRedirect(packageName)}
                 role="button"
               >
                 <div className="flex w-full flex-col">

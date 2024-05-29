@@ -1,4 +1,4 @@
-import { getPackageDetail } from '@/api/get-package-detail'
+import { getPackageInfo } from '@/api/npms/get-package-info'
 import { useQuery } from '@tanstack/react-query'
 import { useLocation } from 'react-router-dom'
 
@@ -8,22 +8,22 @@ import { ResumePackage } from './resume-package'
 
 export function Package() {
   const location = useLocation()
+  const packageName = location.state
 
-  const { packageName, version } = location.state
-  const { data: detailPackage, isFetching } = useQuery({
-    queryKey: ['package-detail', packageName, version],
-    queryFn: () => getPackageDetail(packageName, version),
+  const { data: dataPackage, isFetching } = useQuery({
+    queryKey: ['package-info', packageName],
+    queryFn: () => getPackageInfo(packageName),
     retry: 2,
   })
 
-  if (isFetching || !detailPackage) return
+  if (isFetching || !dataPackage) return
 
   return (
     <div className="flex min-h-screen w-full flex-col items-center">
-      <ResumePackage detailPackage={detailPackage} />
+      <ResumePackage dataPackage={dataPackage} />
 
       <div className="flex w-full flex-col gap-8 py-8 sm:flex sm:flex-row">
-        <CardGeneralInfo detailPackage={detailPackage} />
+        <CardGeneralInfo dataPackage={dataPackage} />
         <CardBundle />
       </div>
     </div>

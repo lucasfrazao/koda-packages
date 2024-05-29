@@ -8,24 +8,22 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 
-import { GetPackageDetailResponse } from '@/api/get-package-detail'
+import type { GetPackageInfoResponse } from '@/api/npms/types'
 
 interface CardGeneralInfoProps {
-  detailPackage: GetPackageDetailResponse
+  dataPackage: GetPackageInfoResponse
 }
 
-export function CardGeneralInfo({ detailPackage }: CardGeneralInfoProps) {
-  const repositoryURLFormated = (url: string) => {
-    return url.slice(4).toString()
-  }
+export function CardGeneralInfo({ dataPackage }: CardGeneralInfoProps) {
+  const { metadata } = dataPackage.collected
 
   const handleRedirectToRepository = () => {
-    const url = repositoryURLFormated(detailPackage.repository.url)
+    const url = metadata.links.repository
     window.open(url)
   }
 
   const handleRedirectToHomepage = () => {
-    window.open(detailPackage.homepage)
+    window.open(metadata.links.homepage)
   }
 
   return (
@@ -55,7 +53,7 @@ export function CardGeneralInfo({ detailPackage }: CardGeneralInfoProps) {
             role="button"
             onClick={handleRedirectToRepository}
           >
-            {repositoryURLFormated(detailPackage.repository.url)}
+            {metadata.links.homepage}
           </span>
         </div>
 
@@ -71,7 +69,7 @@ export function CardGeneralInfo({ detailPackage }: CardGeneralInfoProps) {
             role="button"
             onClick={handleRedirectToHomepage}
           >
-            {detailPackage.homepage}
+            {metadata.links.homepage}
           </span>
         </div>
 
@@ -82,7 +80,7 @@ export function CardGeneralInfo({ detailPackage }: CardGeneralInfoProps) {
             <Package size={20} />
             <span>Latest Version</span>
           </div>
-          <span className="text-sm font-semibold">{detailPackage.version}</span>
+          <span className="text-sm font-semibold">{metadata.version}</span>
         </div>
 
         <Separator />
@@ -92,7 +90,7 @@ export function CardGeneralInfo({ detailPackage }: CardGeneralInfoProps) {
             <Scale size={20} />
             <span>License</span>
           </div>
-          <span className="text-sm font-semibold">{detailPackage.license}</span>
+          <span className="text-sm font-semibold">{metadata.license}</span>
         </div>
       </CardContent>
     </Card>
