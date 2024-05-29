@@ -5,38 +5,33 @@ import { Badge } from '@/components/ui/badge'
 import { ExternalLink } from 'lucide-react'
 
 interface ResumePackageProps {
-  resultPackage: GetPackageDetailResponse
+  detailPackage: GetPackageDetailResponse
 }
 
-export function ResumePackage({ resultPackage }: ResumePackageProps) {
+export function ResumePackage({ detailPackage }: ResumePackageProps) {
   const location = useLocation()
 
   const handleRedirectToHomepage = () => {
-    window.open(resultPackage.homepage)
+    window.open(detailPackage.homepage)
   }
 
   return (
-    <div className="mt-12 w-2/3">
+    <div className="mt-12 w-full">
       <div className="flex flex-row items-center gap-4">
-        <h1 className="font-mono text-xl">{location.state}</h1>
+        <h1 className="font-mono text-xl">{location.state.packageName}</h1>
         <ExternalLink
           className="hover:cursor-pointer hover:text-[#E4434C]"
           size={18}
           onClick={handleRedirectToHomepage}
         />
       </div>
-      <div>
-        <span className="text-xs font-light italic text-zinc-400">
-          latest version {resultPackage.version}
-        </span>
-      </div>
 
-      <span className="text-muted-foreground">{resultPackage.description}</span>
+      <span className="text-muted-foreground">{detailPackage.description}</span>
       <span className="flex flex-1 justify-end text-sm">
-        {resultPackage.author.name}
+        {detailPackage.author.name}
       </span>
       <div className="mt-4 flex flex-row flex-wrap items-center gap-2">
-        {resultPackage.keywords.map((keyword, index) => {
+        {detailPackage.keywords.map((keyword, index) => {
           return (
             <Badge key={index} variant="outline">
               {keyword}

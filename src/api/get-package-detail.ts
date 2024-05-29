@@ -15,8 +15,10 @@ export interface GetPackageDetailResponse {
   }
 }
 
-export async function getPackageDetail(name: string) {
-  const response = await api.get<GetPackageDetailResponse>(`/${name}`)
+export async function getPackageDetail(name: string, version: string) {
+  const response = await api.get<GetPackageDetailResponse>(
+    `/${name}/${version}`,
+  )
 
   return response.data
 }

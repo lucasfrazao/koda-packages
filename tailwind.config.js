@@ -10,6 +10,7 @@ module.exports = {
   prefix: '',
   theme: {
     fontFamily: {
+      sans: ['"Figtree"'],
       mono: ['"JetBrains Mono"'],
     },
     container: {

@@ -1,30 +1,49 @@
-import { FolderGit2, Link } from 'lucide-react'
+import { FolderGit2, Link, Microscope, Package } from 'lucide-react'
 
-import { GetPackageDetailResponse } from '@/api/get-package-detail'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+
+import { GetPackageDetailResponse } from '@/api/get-package-detail'
 
 interface CardGeneralInfoProps {
-  resultPackage: GetPackageDetailResponse
+  detailPackage: GetPackageDetailResponse
 }
 
-export function CardGeneralInfo({ resultPackage }: CardGeneralInfoProps) {
+export function CardGeneralInfo({ detailPackage }: CardGeneralInfoProps) {
   const repositoryURLFormated = (url: string) => {
     return url.slice(4).toString()
   }
 
   const handleRedirectToRepository = () => {
-    const url = repositoryURLFormated(resultPackage.repository.url)
+    const url = repositoryURLFormated(detailPackage.repository.url)
     window.open(url)
   }
 
   const handleRedirectToHomepage = () => {
-    window.open(resultPackage.homepage)
+    window.open(detailPackage.homepage)
   }
 
   return (
-    <Card>
-      <CardHeader className="font-medium">General Information</CardHeader>
+    <Card className="w-full">
+      <CardHeader className="flex w-full flex-row items-center justify-between">
+        <span className="text-lg font-semibold">General Information</span>
+
+        <Tooltip>
+          <TooltipTrigger>
+            <span className="flex gap-2 text-sm text-muted-foreground hover:cursor-help">
+              Stats for nerds
+              <Microscope />
+            </span>
+          </TooltipTrigger>
+          <TooltipContent>Coming soon</TooltipContent>
+        </Tooltip>
+      </CardHeader>
+
       <CardContent className="flex flex-col gap-4">
         <div className="flex flex-col gap-4">
           <div className="flex flex-row items-center gap-4">
@@ -36,7 +55,7 @@ export function CardGeneralInfo({ resultPackage }: CardGeneralInfoProps) {
             role="button"
             onClick={handleRedirectToRepository}
           >
-            {repositoryURLFormated(resultPackage.repository.url)}
+            {repositoryURLFormated(detailPackage.repository.url)}
           </span>
         </div>
 
@@ -52,7 +71,7 @@ export function CardGeneralInfo({ resultPackage }: CardGeneralInfoProps) {
             role="button"
             onClick={handleRedirectToHomepage}
           >
-            {resultPackage.homepage}
+            {detailPackage.homepage}
           </span>
         </div>
 
@@ -60,14 +79,11 @@ export function CardGeneralInfo({ resultPackage }: CardGeneralInfoProps) {
 
         <div className="flex flex-col gap-4">
           <div className="flex flex-row items-center gap-4">
-            <Link size={20} />
+            <Package size={20} />
             <span>Latest Version</span>
           </div>
-          <span
-            className="text-sm font-semibold hover:text-slate-600"
-            role="button"
-          >
-            {resultPackage.version}
+          <span className="text-sm font-semibold" role="button">
+            {detailPackage.version}
           </span>
         </div>
       </CardContent>
