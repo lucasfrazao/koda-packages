@@ -16,8 +16,6 @@ export function Package() {
 
   if (!resultPackage) return
 
-  // console.log(resultPackage)
-
   return (
     <div className="flex min-h-screen w-full flex-col items-center">
       <ResumePackage resultPackage={resultPackage} />

@@ -9,22 +9,17 @@ interface CardGeneralInfoProps {
 }
 
 export function CardGeneralInfo({ resultPackage }: CardGeneralInfoProps) {
-  const latestVersion = resultPackage['dist-tags'].latest
-
-  const { repository, homepage, version } =
-    resultPackage.versions[latestVersion]
-
   const repositoryURLFormated = (url: string) => {
     return url.slice(4).toString()
   }
 
   const handleRedirectToRepository = () => {
-    const url = repositoryURLFormated(repository.url)
+    const url = repositoryURLFormated(resultPackage.repository.url)
     window.open(url)
   }
 
   const handleRedirectToHomepage = () => {
-    window.open(homepage)
+    window.open(resultPackage.homepage)
   }
 
   return (
@@ -41,7 +36,7 @@ export function CardGeneralInfo({ resultPackage }: CardGeneralInfoProps) {
             role="button"
             onClick={handleRedirectToRepository}
           >
-            {repositoryURLFormated(repository.url)}
+            {repositoryURLFormated(resultPackage.repository.url)}
           </span>
         </div>
 
@@ -57,7 +52,7 @@ export function CardGeneralInfo({ resultPackage }: CardGeneralInfoProps) {
             role="button"
             onClick={handleRedirectToHomepage}
           >
-            {homepage}
+            {resultPackage.homepage}
           </span>
         </div>
 
@@ -72,7 +67,7 @@ export function CardGeneralInfo({ resultPackage }: CardGeneralInfoProps) {
             className="text-sm font-semibold hover:text-slate-600"
             role="button"
           >
-            {version}
+            {resultPackage.version}
           </span>
         </div>
       </CardContent>

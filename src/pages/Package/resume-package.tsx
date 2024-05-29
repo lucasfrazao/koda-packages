@@ -10,10 +10,9 @@ interface ResumePackageProps {
 
 export function ResumePackage({ resultPackage }: ResumePackageProps) {
   const location = useLocation()
-  const latestVersion = resultPackage['dist-tags'].latest
 
   const handleRedirectToHomepage = () => {
-    window.open(resultPackage.versions[latestVersion].homepage)
+    window.open(resultPackage.homepage)
   }
 
   return (
@@ -28,7 +27,7 @@ export function ResumePackage({ resultPackage }: ResumePackageProps) {
       </div>
       <div>
         <span className="text-xs font-light italic text-zinc-400">
-          latest version {latestVersion}
+          latest version {resultPackage.version}
         </span>
       </div>
 
@@ -37,15 +36,13 @@ export function ResumePackage({ resultPackage }: ResumePackageProps) {
         {resultPackage.author.name}
       </span>
       <div className="mt-4 flex flex-row flex-wrap items-center gap-2">
-        {resultPackage.versions[latestVersion].keywords.map(
-          (keyword, index) => {
-            return (
-              <Badge key={index} variant="outline">
-                {keyword}
-              </Badge>
-            )
-          },
-        )}
+        {resultPackage.keywords.map((keyword, index) => {
+          return (
+            <Badge key={index} variant="outline">
+              {keyword}
+            </Badge>
+          )
+        })}
       </div>
     </div>
   )
