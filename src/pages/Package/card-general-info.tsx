@@ -1,4 +1,4 @@
-import { FolderGit2, Link, Microscope, Package } from 'lucide-react'
+import { FolderGit2, Link, Microscope, Package, Scale } from 'lucide-react'
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
@@ -82,9 +82,17 @@ export function CardGeneralInfo({ detailPackage }: CardGeneralInfoProps) {
             <Package size={20} />
             <span>Latest Version</span>
           </div>
-          <span className="text-sm font-semibold" role="button">
-            {detailPackage.version}
-          </span>
+          <span className="text-sm font-semibold">{detailPackage.version}</span>
+        </div>
+
+        <Separator />
+
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-row items-center gap-4">
+            <Scale size={20} />
+            <span>License</span>
+          </div>
+          <span className="text-sm font-semibold">{detailPackage.license}</span>
         </div>
       </CardContent>
     </Card>
