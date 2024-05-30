@@ -13,8 +13,6 @@ export function ResumePackage({ dataPackage }: ResumePackageProps) {
 
   const { description, keywords, publisher } = dataPackage.collected.metadata
 
-  console.log('dataPackage', dataPackage)
-
   const handleRedirectToHomepage = () => {
     const url = dataPackage.collected.metadata.links.homepage
     window.open(url)
