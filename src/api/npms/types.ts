@@ -5,6 +5,13 @@ export interface PackageLinks {
   repository: string
 }
 
+export interface PackageGithubData {
+  contributors: {
+    username: string
+    commitsCount: string
+  }[]
+}
+
 export interface PackageMetadata {
   author: {
     name: string
@@ -24,5 +31,6 @@ export interface GetPackageInfoResponse {
   analyzedAt: string
   collected: {
     metadata: PackageMetadata
+    github: PackageGithubData
   }
 }
