@@ -8,23 +8,8 @@ interface CardDependenciesProps {
 }
 
 export function CardDependencies({ dataPackage }: CardDependenciesProps) {
-  const { dependencies, devDependencies, peerDependencies } =
+  const { devDependencies, dependencies, peerDependencies } =
     dataPackage.collected.metadata
-
-  let arrayDependencies: [string, string][] = []
-  if (dependencies) {
-    arrayDependencies = Object.entries(dependencies)
-  }
-
-  let arrayDevDependencies: [string, string][] = []
-  if (devDependencies) {
-    arrayDevDependencies = Object.entries(devDependencies)
-  }
-
-  let arrayPeerDependencies: [string, string][] = []
-  if (peerDependencies) {
-    arrayPeerDependencies = Object.entries(peerDependencies)
-  }
 
   return (
     <ScrollArea className="flex max-h-[300px] w-full flex-col scroll-smooth pr-6">
@@ -35,14 +20,12 @@ export function CardDependencies({ dataPackage }: CardDependenciesProps) {
             <span>Dependencies</span>
           </div>
           <ScrollArea className="flex w-full flex-col rounded-md bg-primary-foreground p-2 font-mono">
-            {arrayDependencies.map((item, index) => {
-              return (
-                <div key={index} className="flex w-full flex-row text-xs">
-                  <blockquote>{item[0]}</blockquote>
-                  <blockquote>: {item[1]}</blockquote>
-                </div>
-              )
-            })}
+            {Object.entries(dependencies).map((item, index) => (
+              <div key={index} className="flex w-full flex-row text-xs">
+                <blockquote>{item[0]}</blockquote>
+                <blockquote>: {item[1]}</blockquote>
+              </div>
+            ))}
           </ScrollArea>
         </div>
       )}
@@ -54,14 +37,12 @@ export function CardDependencies({ dataPackage }: CardDependenciesProps) {
             <span>Dev Dependencies</span>
           </div>
           <ScrollArea className="flex h-[200px] w-full  flex-col rounded-md bg-primary-foreground p-2 font-mono">
-            {arrayDevDependencies.map((item, index) => {
-              return (
-                <div key={index} className="flex w-full flex-row text-xs">
-                  <blockquote>{item[0]}</blockquote>
-                  <blockquote>: {item[1]}</blockquote>
-                </div>
-              )
-            })}
+            {Object.entries(devDependencies).map((item, index) => (
+              <div key={index} className="flex w-full flex-row text-xs">
+                <blockquote>{item[0]}</blockquote>
+                <blockquote>: {item[1]}</blockquote>
+              </div>
+            ))}
           </ScrollArea>
         </div>
       )}
@@ -73,14 +54,12 @@ export function CardDependencies({ dataPackage }: CardDependenciesProps) {
             <span>Peer Dependencies</span>
           </div>
           <ScrollArea className="flex h-[200px] w-full  flex-col rounded-md bg-primary-foreground p-2 font-mono">
-            {arrayPeerDependencies.map((item, index) => {
-              return (
-                <div key={index} className="flex w-full flex-row text-xs">
-                  <blockquote>{item[0]}</blockquote>
-                  <blockquote>: {item[1]}</blockquote>
-                </div>
-              )
-            })}
+            {Object.entries(peerDependencies).map((item, index) => (
+              <div key={index} className="flex w-full flex-row text-xs">
+                <blockquote>{item[0]}</blockquote>
+                <blockquote>: {item[1]}</blockquote>
+              </div>
+            ))}
           </ScrollArea>
         </div>
       )}
