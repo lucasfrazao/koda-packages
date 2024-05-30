@@ -70,7 +70,7 @@ export function Home() {
           {...register('search')}
         />
         <ul
-          hidden={resultPackages && !(resultPackages.total > 0)}
+          hidden={resultPackages && resultPackages.total <= 0}
           className="absolute top-full z-10 mt-4 max-h-60 w-full overflow-auto rounded-lg border border-slate-200 shadow-sm"
         >
           {resultPackages?.objects.map((item, index) => {
