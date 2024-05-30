@@ -4,6 +4,7 @@ import { GetBundlePackageResponse } from '@/api/bundlephobia/get-bundle-package'
 import { GetPackageInfoResponse } from '@/api/npms/types'
 import { CardBundleSize } from '@/components/cards/card-bundle-size'
 import { CardDependencies } from '@/components/cards/card-dependencies'
+import { CardPackageVersions } from '@/components/cards/card-package-versions'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import {
   Select,
@@ -36,9 +37,7 @@ export function CardBundle({ dataBundle, dataPackage }: CardBundleProps) {
           <SelectContent>
             <SelectItem value="general">General</SelectItem>
             <SelectItem value="dependencies">Dependencies</SelectItem>
-            <SelectItem value="versions" disabled>
-              Other versions
-            </SelectItem>
+            <SelectItem value="versions">Other versions</SelectItem>
           </SelectContent>
         </Select>
       </CardHeader>
@@ -50,6 +49,8 @@ export function CardBundle({ dataBundle, dataPackage }: CardBundleProps) {
         {isMetadataDisplay === 'dependencies' && (
           <CardDependencies dataPackage={dataPackage} />
         )}
+
+        {isMetadataDisplay === 'versions' && <CardPackageVersions />}
       </CardContent>
     </Card>
   )
