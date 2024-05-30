@@ -12,6 +12,10 @@ export interface PackageGithubData {
   }[]
 }
 
+export interface DependencyReponse {
+  [key: string]: string
+}
+
 export interface PackageMetadata {
   author: {
     name: string
@@ -25,6 +29,9 @@ export interface PackageMetadata {
   version: string
   license: string
   links: PackageLinks
+  dependencies?: DependencyReponse
+  devDependencies?: DependencyReponse
+  peerDependencies?: DependencyReponse
 }
 
 export interface GetPackageInfoResponse {

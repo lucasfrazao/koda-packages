@@ -1,7 +1,9 @@
-import { getPackageInfo } from '@/api/npms/get-package-info'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { useQuery } from '@tanstack/react-query'
 import { useLocation } from 'react-router-dom'
+
+import { getBundlePackage } from '@/api/bundlephobia/get-bundle-package'
+import { getPackageInfo } from '@/api/npms/get-package-info'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 import { CardBundle } from './card-bundle'
 import { CardGeneralInfo } from './card-general-info'
@@ -11,13 +13,20 @@ export function Package() {
   const location = useLocation()
   const packageName = location.state
 
-  const { data: dataPackage, isFetching } = useQuery({
+  const { data: dataPackage } = useQuery({
     queryKey: ['package-info', packageName],
     queryFn: () => getPackageInfo(packageName),
     retry: 2,
+    staleTime: Infinity,
   })
 
-  if (isFetching || !dataPackage) return
+  const { data: dataBundlePackage } = useQuery({
+    queryKey: ['package-bundle', packageName],
+    queryFn: () => getBundlePackage({ packageName }),
+    retry: 2,
+  })
+
+  if (!dataPackage || !dataBundlePackage) return
 
   return (
     <div className="flex w-full flex-col items-center">
@@ -25,7 +34,7 @@ export function Package() {
 
       <div className="flex w-full flex-col gap-8 py-8 sm:flex sm:flex-row">
         <CardGeneralInfo dataPackage={dataPackage} />
-        <CardBundle />
+        <CardBundle dataPackage={dataPackage} dataBundle={dataBundlePackage} />
       </div>
 
       <div className="w-full">

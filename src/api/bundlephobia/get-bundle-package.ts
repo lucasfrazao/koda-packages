@@ -1,6 +1,6 @@
 import { callBundlephobiaApi } from './config'
 
-interface GetBundlePackageResponse {
+export interface GetBundlePackageResponse {
   gzip: number
   size: number
 }
