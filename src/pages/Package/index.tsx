@@ -19,7 +19,7 @@ export function Package() {
   if (isFetching || !dataPackage) return
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center">
+    <div className="flex w-full flex-col items-center">
       <ResumePackage dataPackage={dataPackage} />
 
       <div className="flex w-full flex-col gap-8 py-8 sm:flex sm:flex-row">

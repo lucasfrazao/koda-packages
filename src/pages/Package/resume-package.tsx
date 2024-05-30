@@ -11,7 +11,9 @@ interface ResumePackageProps {
 export function ResumePackage({ dataPackage }: ResumePackageProps) {
   const location = useLocation()
 
-  const { author, description, keywords } = dataPackage.collected.metadata
+  const { description, keywords, publisher } = dataPackage.collected.metadata
+
+  console.log('dataPackage', dataPackage)
 
   const handleRedirectToHomepage = () => {
     const url = dataPackage.collected.metadata.links.homepage
@@ -30,16 +32,20 @@ export function ResumePackage({ dataPackage }: ResumePackageProps) {
       </div>
       <span className="text-muted-foreground">{description}</span>
 
-      <span className="flex flex-1 justify-end text-sm">{author.name}</span>
+      <div className="mt-4 flex flex-1 flex-row items-center gap-2">
+        <span className="text-sm">Publisher |</span>
+        <span className="text-sm">{publisher.username}</span>
+      </div>
 
       <div className="mt-4 flex flex-row flex-wrap items-center gap-2">
-        {keywords.map((keyword, index) => {
-          return (
-            <Badge key={index} variant="outline">
-              {keyword}
-            </Badge>
-          )
-        })}
+        {keywords &&
+          keywords.map((keyword, index) => {
+            return (
+              <Badge key={index} variant="outline">
+                {keyword}
+              </Badge>
+            )
+          })}
       </div>
     </div>
   )

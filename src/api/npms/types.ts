@@ -9,6 +9,10 @@ export interface PackageMetadata {
   author: {
     name: string
   }
+  publisher: {
+    email: string
+    username: string
+  }
   description: string
   keywords: string[]
   version: string

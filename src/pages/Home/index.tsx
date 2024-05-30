@@ -51,10 +51,10 @@ export function Home() {
   }
 
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center">
       <form
         onChange={handleSubmit(handleFilter)}
-        className="relative mb-80 flex w-2/3 flex-col items-center sm:mb-0"
+        className="relative mt-20 flex w-2/3 flex-col items-center sm:mt-80"
       >
         <img className="h-24 w-24" src="./koda.svg" alt="logo koda packages" />
         <Label
