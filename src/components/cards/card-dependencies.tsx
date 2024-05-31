@@ -18,7 +18,7 @@ export function CardDependencies({ dataPackage }: CardDependenciesProps) {
             <PackageOpen size={20} />
             <span>Dependencies</span>
           </div>
-          <ScrollArea className="flex w-full flex-col rounded-md bg-primary-foreground p-2 font-mono">
+          <ScrollArea className="flex max-h-[200px] w-full flex-col rounded-md bg-primary-foreground p-2 font-mono">
             {Object.entries(dependencies).map((item, index) => (
               <div key={index} className="flex w-full flex-row text-xs">
                 <blockquote>{item[0]}</blockquote>
@@ -35,7 +35,7 @@ export function CardDependencies({ dataPackage }: CardDependenciesProps) {
             <Boxes size={20} />
             <span>Dev Dependencies</span>
           </div>
-          <ScrollArea className="flex h-[200px] w-full  flex-col rounded-md bg-primary-foreground p-2 font-mono">
+          <ScrollArea className="flex max-h-[200px] w-full  flex-col rounded-md bg-primary-foreground p-2 font-mono">
             {Object.entries(devDependencies).map((item, index) => (
               <div key={index} className="flex w-full flex-row text-xs">
                 <blockquote>{item[0]}</blockquote>
@@ -52,7 +52,7 @@ export function CardDependencies({ dataPackage }: CardDependenciesProps) {
             <Combine size={20} />
             <span>Peer Dependencies</span>
           </div>
-          <ScrollArea className="flex h-[200px] w-full  flex-col rounded-md bg-primary-foreground p-2 font-mono">
+          <ScrollArea className="flex max-h-[200px] w-full  flex-col rounded-md bg-primary-foreground p-2 font-mono">
             {Object.entries(peerDependencies).map((item, index) => (
               <div key={index} className="flex w-full flex-row text-xs">
                 <blockquote>{item[0]}</blockquote>
