@@ -10,7 +10,8 @@ export function LayoutHome() {
         <span>made with love by</span>
         <Link
           className="font-bold hover:text-[#E4434C]"
-          to="github.com/lucasfrazao"
+          to="https://github.com/lucasfrazao"
+          target="_blank"
         >
           Lucas Frazao
         </Link>
