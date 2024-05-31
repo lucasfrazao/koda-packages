@@ -8,6 +8,10 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { CardBundle } from './card-bundle'
 import { CardGeneralInfo } from './card-general-info'
 import { ResumePackage } from './resume-package'
+import { BundleInformationSkeleton } from './skeleton/bundle-information-skeleton'
+import { ContributorsSkeleton } from './skeleton/contributors-skeleton'
+import { GeneralInfoSkeleton } from './skeleton/general-info-skeleton'
+import { ResumePackageSkeleton } from './skeleton/resume-package-skeleton'
 
 export function Package() {
   const location = useLocation()
@@ -26,34 +30,52 @@ export function Package() {
     retry: 2,
   })
 
-  if (!dataPackage || !dataBundlePackage) return
-
   return (
     <div className="flex w-full flex-col items-center">
-      <ResumePackage dataPackage={dataPackage} />
+      {!dataPackage ? (
+        <ResumePackageSkeleton />
+      ) : (
+        <ResumePackage dataPackage={dataPackage} />
+      )}
 
       <div className="flex w-full flex-col gap-8 py-8 sm:flex sm:flex-row">
-        <CardGeneralInfo dataPackage={dataPackage} />
-        <CardBundle dataPackage={dataPackage} dataBundle={dataBundlePackage} />
+        {!dataPackage ? (
+          <GeneralInfoSkeleton />
+        ) : (
+          <CardGeneralInfo dataPackage={dataPackage} />
+        )}
+
+        {!dataPackage || !dataBundlePackage ? (
+          <BundleInformationSkeleton />
+        ) : (
+          <CardBundle
+            dataPackage={dataPackage}
+            dataBundle={dataBundlePackage}
+          />
+        )}
       </div>
 
-      <div className="w-full">
-        <span className="w-full text-left text-xl">Contributors</span>
-        <div className="flex flex-row flex-wrap gap-2 py-4">
-          {dataPackage?.collected?.github?.contributors.map(
-            (contributor, index) => {
-              return (
-                <Avatar key={index}>
-                  <AvatarImage
-                    src={`https://github.com/${contributor.username}.png`}
-                  />
-                  <AvatarFallback>{contributor.username}</AvatarFallback>
-                </Avatar>
-              )
-            },
-          )}
+      {!dataPackage ? (
+        <ContributorsSkeleton />
+      ) : (
+        <div className="w-full">
+          <span className="w-full text-left text-xl">Contributors</span>
+          <div className="flex flex-row flex-wrap gap-2 py-4">
+            {dataPackage?.collected?.github?.contributors.map(
+              (contributor, index) => {
+                return (
+                  <Avatar key={index}>
+                    <AvatarImage
+                      src={`https://github.com/${contributor.username}.png`}
+                    />
+                    <AvatarFallback>{contributor.username}</AvatarFallback>
+                  </Avatar>
+                )
+              },
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
