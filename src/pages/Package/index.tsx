@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 
 import { getBundlePackage } from '@/api/bundlephobia/get-bundle-package'
 import { getPackageInfo } from '@/api/node-registry/get-package-info'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { AvatarMaintainer } from '@/components/avatar-maintainer'
 
 import { CardBundle } from './card-bundle'
 import { CardGeneralInfo } from './card-general-info'
@@ -64,14 +64,7 @@ export function Package() {
           <span className="w-full text-left text-xl">Maintainers</span>
           <div className="flex flex-row flex-wrap gap-2 py-4">
             {dataPackage.maintainers.map((maintainer, index) => {
-              return (
-                <Avatar key={index}>
-                  <AvatarImage
-                    src={`https://github.com/${maintainer.name}.png`}
-                  />
-                  <AvatarFallback>{maintainer.name}</AvatarFallback>
-                </Avatar>
-              )
+              return <AvatarMaintainer key={index} name={maintainer.name} />
             })}
           </div>
         </div>
