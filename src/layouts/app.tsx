@@ -19,8 +19,13 @@ export function LayoutApp() {
           </Link>
 
           <div className="flex flex-row items-center gap-4">
-            <span className="text-sm">FAQ</span>
-            <span className="text-sm">About</span>
+            <Link to="#">
+              <span className="text-sm">FAQ</span>
+            </Link>
+
+            <Link to="/about">
+              <span className="text-sm hover:text-muted-foreground">About</span>
+            </Link>
 
             <Link
               to="https://github.com/lucasfrazao/koda-packages"
