@@ -8,22 +8,20 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 
-import type { GetPackageInfoResponse } from '@/api/npms/types'
+import type { GetPackageInfoResponse } from '@/api/node-registry/get-package-info'
 
 interface CardGeneralInfoProps {
   dataPackage: GetPackageInfoResponse
 }
 
 export function CardGeneralInfo({ dataPackage }: CardGeneralInfoProps) {
-  const { metadata } = dataPackage.collected
-
   const handleRedirectToRepository = () => {
-    const url = metadata.links.repository
+    const url = dataPackage.repository.url.slice(4).toString()
     window.open(url)
   }
 
   const handleRedirectToHomepage = () => {
-    window.open(metadata.links.homepage)
+    window.open(dataPackage.homepage)
   }
 
   return (
@@ -53,7 +51,7 @@ export function CardGeneralInfo({ dataPackage }: CardGeneralInfoProps) {
             role="button"
             onClick={handleRedirectToRepository}
           >
-            {metadata.links.homepage}
+            {dataPackage.repository.url}
           </span>
         </div>
 
@@ -69,7 +67,7 @@ export function CardGeneralInfo({ dataPackage }: CardGeneralInfoProps) {
             role="button"
             onClick={handleRedirectToHomepage}
           >
-            {metadata.links.homepage}
+            {dataPackage.homepage}
           </span>
         </div>
 
@@ -80,7 +78,7 @@ export function CardGeneralInfo({ dataPackage }: CardGeneralInfoProps) {
             <Package size={20} />
             <span>Latest Version</span>
           </div>
-          <span className="text-sm font-semibold">{metadata.version}</span>
+          <span className="text-sm font-semibold">{dataPackage.version}</span>
         </div>
 
         <Separator />
@@ -90,7 +88,7 @@ export function CardGeneralInfo({ dataPackage }: CardGeneralInfoProps) {
             <Scale size={20} />
             <span>License</span>
           </div>
-          <span className="text-sm font-semibold">{metadata.license}</span>
+          <span className="text-sm font-semibold">{dataPackage.license}</span>
         </div>
       </CardContent>
     </Card>

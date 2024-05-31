@@ -1,7 +1,8 @@
 import { useState } from 'react'
 
-import { GetBundlePackageResponse } from '@/api/bundlephobia/get-bundle-package'
-import { GetPackageInfoResponse } from '@/api/npms/types'
+import type { GetBundlePackageResponse } from '@/api/bundlephobia/get-bundle-package'
+import type { GetPackageInfoResponse } from '@/api/node-registry/get-package-info'
+
 import { CardBundleSize } from '@/components/cards/card-bundle-size'
 import { CardDependencies } from '@/components/cards/card-dependencies'
 import { CardPackageVersions } from '@/components/cards/card-package-versions'

@@ -30,9 +30,12 @@ export function Home() {
     queryFn: () => getPackages({ text: packageName }),
   })
 
-  function handleRedirect(packageName: string) {
+  function handleRedirect(packageName: string, version: string) {
     navigate(`/detail-package`, {
-      state: packageName,
+      state: {
+        packageName,
+        version,
+      },
     })
   }
 
@@ -75,12 +78,13 @@ export function Home() {
         >
           {resultPackages?.objects.map((item, index) => {
             const packageName = item.package.name
+            const version = item.package.version
 
             return (
               <li
                 key={index}
                 className="mb-2 flex justify-between p-4 hover:bg-zinc-100"
-                onClick={() => handleRedirect(packageName)}
+                onClick={() => handleRedirect(packageName, version)}
                 role="button"
               >
                 <div className="flex w-full flex-col">

@@ -12,7 +12,6 @@
 To built this web application I've used different apis and stacks, down below I'll introduce some stuff to make this possible. First of all, lets gonna talking about apis to get metadata packages and bundle information.
 
 - <a href="https://github.com/pastelsky/bundlephobia" target="_blank">bundlephobia-api</a> it's amazing! There's no doubts, that's have been the main inspiration to built koda packages! <a href="https://bundlephobia.com/" target="_blank">Click here</a> to check the website.
-- <a href="https://api-docs.npms.io/#api">npms-api</a> an excellent open source search api to get node packages information.
 - <a href="https://github.com/npm/registry/tree/main">registry npm</a> a collection of archived documentation about registry endpoints/API.
 
 Ok, now we can talking about stacks. I'll try to be concise.

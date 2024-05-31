@@ -1,6 +1,6 @@
 import { Boxes, Combine, PackageOpen } from 'lucide-react'
 
-import { GetPackageInfoResponse } from '@/api/npms/types'
+import type { GetPackageInfoResponse } from '@/api/node-registry/get-package-info'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
 interface CardDependenciesProps {
@@ -8,8 +8,7 @@ interface CardDependenciesProps {
 }
 
 export function CardDependencies({ dataPackage }: CardDependenciesProps) {
-  const { devDependencies, dependencies, peerDependencies } =
-    dataPackage.collected.metadata
+  const { devDependencies, dependencies, peerDependencies } = dataPackage
 
   return (
     <ScrollArea className="flex max-h-[300px] w-full flex-col scroll-smooth pr-6">
