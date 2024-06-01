@@ -17,7 +17,7 @@ export function GeneralInfoSkeleton() {
         <Tooltip>
           <TooltipTrigger>
             <span className="flex gap-2 text-sm text-muted-foreground hover:cursor-help">
-              Stats for nerds
+              Treemap dependencies
               <Microscope />
             </span>
           </TooltipTrigger>

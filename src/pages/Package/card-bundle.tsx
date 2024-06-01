@@ -5,7 +5,7 @@ import type { GetPackageInfoResponse } from '@/api/node-registry/get-package-inf
 
 import { CardBundleSize } from '@/components/cards/card-bundle-size'
 import { CardDependencies } from '@/components/cards/card-dependencies'
-import { CardPackageVersions } from '@/components/cards/card-package-versions'
+import { DialogStatsBundle } from '@/components/dialog-stats-bundle'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import {
   Select,
@@ -28,19 +28,22 @@ export function CardBundle({ dataBundle, dataPackage }: CardBundleProps) {
       <CardHeader className="flex w-full flex-row items-center justify-between">
         <span className="text-lg font-semibold">Bundle Information</span>
 
-        <Select
-          value={isMetadataDisplay}
-          onValueChange={(value) => setIsMetadataDisplay(value)}
-        >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="General" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="general">General</SelectItem>
-            <SelectItem value="dependencies">Dependencies</SelectItem>
-            <SelectItem value="versions">Other versions</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="flex flex-row gap-8">
+          <DialogStatsBundle />
+
+          <Select
+            value={isMetadataDisplay}
+            onValueChange={(value) => setIsMetadataDisplay(value)}
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="General" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="general">General</SelectItem>
+              <SelectItem value="dependencies">Dependencies</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </CardHeader>
       <CardContent className="min-h-4/5 flex w-full flex-row items-center justify-around">
         {isMetadataDisplay === 'general' && (
@@ -50,8 +53,6 @@ export function CardBundle({ dataBundle, dataPackage }: CardBundleProps) {
         {isMetadataDisplay === 'dependencies' && (
           <CardDependencies dataPackage={dataPackage} />
         )}
-
-        {isMetadataDisplay === 'versions' && <CardPackageVersions />}
       </CardContent>
     </Card>
   )
