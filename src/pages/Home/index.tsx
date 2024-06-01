@@ -74,7 +74,7 @@ export function Home() {
         />
         <ul
           hidden={!resultPackages || resultPackages.total <= 0}
-          className="absolute top-full z-10 mt-4 max-h-60 w-full overflow-auto rounded-lg border border-slate-200 shadow-sm"
+          className="absolute top-full z-10 mt-4 max-h-60 w-full overflow-auto rounded-lg border border-zinc-200 shadow-sm dark:border-zinc-500"
         >
           {resultPackages?.objects.map((item, index) => {
             const packageName = item.package.name
@@ -83,7 +83,7 @@ export function Home() {
             return (
               <li
                 key={index}
-                className="mb-2 flex justify-between p-4 hover:bg-zinc-100"
+                className="mb-2 flex justify-between p-4 hover:bg-zinc-100 dark:hover:bg-zinc-500"
                 onClick={() => handleRedirect(packageName, version)}
                 role="button"
               >

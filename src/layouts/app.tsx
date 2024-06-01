@@ -1,3 +1,4 @@
+import { ModeToggle } from '@/components/mode-toogle'
 import { Carrot, Github } from 'lucide-react'
 import { Link, Outlet } from 'react-router-dom'
 
@@ -19,6 +20,8 @@ export function LayoutApp() {
           </Link>
 
           <div className="flex flex-row items-center gap-4">
+            <ModeToggle />
+
             <Link to="#">
               <span className="text-sm">FAQ</span>
             </Link>
@@ -31,7 +34,7 @@ export function LayoutApp() {
               to="https://github.com/lucasfrazao/koda-packages"
               target="_blank"
             >
-              <div className="rounded-full bg-slate-200 p-2">
+              <div className="rounded-full bg-zinc-200 p-2 dark:bg-zinc-500">
                 <Github size={24} />
               </div>
             </Link>
