@@ -41,12 +41,6 @@ export function Package() {
       )}
 
       <div className="flex w-full flex-col gap-8 py-8 sm:flex sm:flex-row">
-        {!dataPackage ? (
-          <GeneralInfoSkeleton />
-        ) : (
-          <CardGeneralInfo dataPackage={dataPackage} />
-        )}
-
         {!dataPackage || !dataBundlePackage ? (
           <BundleInformationSkeleton />
         ) : (
@@ -54,6 +48,12 @@ export function Package() {
             dataPackage={dataPackage}
             dataBundle={dataBundlePackage}
           />
+        )}
+
+        {!dataPackage ? (
+          <GeneralInfoSkeleton />
+        ) : (
+          <CardGeneralInfo dataPackage={dataPackage} />
         )}
       </div>
 

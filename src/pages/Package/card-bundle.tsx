@@ -26,9 +26,9 @@ export function CardBundle({ dataBundle, dataPackage }: CardBundleProps) {
   return (
     <Card className="w-full">
       <CardHeader className="flex w-full flex-row items-center justify-between">
-        <span className="text-lg font-semibold">Bundle Information</span>
+        <span className="text-lg font-semibold">Dependencies</span>
 
-        <div className="flex flex-row gap-8">
+        <div className="flex flex-row gap-4">
           <DialogStatsBundle />
 
           <Select

@@ -57,13 +57,13 @@ export function DialogStatsBundle() {
     <Dialog>
       <DialogTrigger>
         <div className="flex flex-row items-center gap-2">
-          <span className="text-sm">Treemap dependencies</span>
+          <span className="text-sm">Composition</span>
           <Microscope size={18} />
         </div>
       </DialogTrigger>
       <DialogContent className="flex h-fit max-w-fit flex-col items-center">
         <DialogHeader className="w-full">
-          <DialogTitle className="text-start">Treemap dependencies</DialogTitle>
+          <DialogTitle className="text-start">Composition</DialogTitle>
         </DialogHeader>
         <Treemap
           className="hover:cursor-pointer"

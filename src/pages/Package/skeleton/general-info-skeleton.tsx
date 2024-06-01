@@ -1,11 +1,6 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
 import { FolderGit2, Link, Microscope, Package, Scale } from 'lucide-react'
 
 export function GeneralInfoSkeleton() {
@@ -14,15 +9,10 @@ export function GeneralInfoSkeleton() {
       <CardHeader className="flex w-full flex-row items-center justify-between">
         <span className="text-lg font-semibold">General Information</span>
 
-        <Tooltip>
-          <TooltipTrigger>
-            <span className="flex gap-2 text-sm text-muted-foreground hover:cursor-help">
-              Treemap dependencies
-              <Microscope />
-            </span>
-          </TooltipTrigger>
-          <TooltipContent>Coming soon</TooltipContent>
-        </Tooltip>
+        <span className="flex gap-2 text-sm text-muted-foreground hover:cursor-help">
+          Composition
+          <Microscope />
+        </span>
       </CardHeader>
 
       <CardContent className="flex flex-col gap-4">
