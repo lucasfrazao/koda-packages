@@ -16,7 +16,15 @@ export function CardBundleSize({ dataBundle }: CardBundleSizeProps) {
     if (!value) {
       return 0
     }
-    return (value / 1000).toFixed(2)
+
+    const totalInKB = parseInt((value / 1000).toFixed(2))
+
+    if (totalInKB > 1000) {
+      const totalInMB = (totalInKB / 1000).toFixed(2)
+      return `${totalInMB} mb`
+    }
+
+    return `${totalInKB} kb`
   }
 
   return (
@@ -42,7 +50,6 @@ export function CardBundleSize({ dataBundle }: CardBundleSizeProps) {
           <span className="font-mono text-5xl">
             {convertBtoKb(dataBundle?.size)}
           </span>
-          <span>kb</span>
         </div>
       </div>
 
@@ -64,7 +71,6 @@ export function CardBundleSize({ dataBundle }: CardBundleSizeProps) {
           <span className="font-mono text-5xl">
             {convertBtoKb(dataBundle?.gzip)}
           </span>
-          <span>kb</span>
         </div>
       </div>
     </div>

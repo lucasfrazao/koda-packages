@@ -28,10 +28,12 @@ export function ResumePackage({ dataPackage }: ResumePackageProps) {
       </div>
       <span className="text-muted-foreground">{dataPackage.description}</span>
 
-      <div className="mt-4 flex flex-1 flex-row items-center gap-2">
-        <span className="text-sm">Author |</span>
-        <span className="text-sm">{dataPackage.author.name}</span>
-      </div>
+      {dataPackage.author && (
+        <div className="mt-4 flex flex-1 flex-row items-center gap-2">
+          <span className="text-sm">Author |</span>
+          <span className="text-sm">{dataPackage.author.name}</span>
+        </div>
+      )}
 
       <div className="mt-4 flex flex-row flex-wrap items-center gap-2">
         {dataPackage.keywords &&
