@@ -1,8 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { Microscope } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
-import type { TooltipProps } from 'recharts'
-import { Tooltip, Treemap } from 'recharts'
+import { Tooltip, Treemap, type TooltipProps } from 'recharts'
+import type {
+  NameType,
+  ValueType,
+} from 'recharts/types/component/DefaultTooltipContent'
 
 import { getPackageHistory } from '@/api/bundlephobia/get-package-history'
 import {
@@ -12,10 +15,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import {
-  NameType,
-  ValueType,
-} from 'recharts/types/component/DefaultTooltipContent'
 
 export function DialogStatsBundle() {
   const location = useLocation()
@@ -34,7 +33,7 @@ export function DialogStatsBundle() {
   }: TooltipProps<ValueType, NameType>) => {
     if (active && payload?.length) {
       return (
-        <div className="rounded-md bg-white p-1">
+        <div className="rounded-md bg-white p-1 dark:text-zinc-500">
           {payload.map((item, index) => {
             return (
               <div className="flex flex-row items-center gap-2" key={index}>
