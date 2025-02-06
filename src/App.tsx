@@ -7,7 +7,7 @@ import { router } from './routes'
 export function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <TooltipProvider>
+      <TooltipProvider delayDuration={200}>
         <RouterProvider router={router} />
       </TooltipProvider>
     </ThemeProvider>

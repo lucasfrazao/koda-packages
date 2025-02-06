@@ -1,6 +1,7 @@
 import { Info } from 'lucide-react'
 
 import { GetBundlePackageResponse } from '@/api/bundlephobia/get-bundle-package'
+
 import {
   Tooltip,
   TooltipContent,
@@ -37,7 +38,7 @@ export function CardBundleSize({ dataBundle }: CardBundleSizeProps) {
           <Tooltip>
             <TooltipTrigger>
               <Info size={16} color="#E4434C" />
-              <TooltipContent>
+              <TooltipContent className="max-w-md">
                 Minification is the process of removing unnecessary or redundant
                 data without affecting how a resource is processed by the
                 browser.
