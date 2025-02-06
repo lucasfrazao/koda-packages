@@ -4,8 +4,11 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
 import { getPackages } from '@/api/node-registry/get-packages'
+
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+
+import { useSearchDebounce } from '@/hooks/use-search-debounce'
 
 const searchFormSchema = z.object({
   search: z.string(),
@@ -17,17 +20,22 @@ export function Home() {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const packageName = searchParams.get('packageName')
+  const packageName = searchParams.get('packageName') ?? ''
 
-  const { register, handleSubmit } = useForm<SearchFormSchema>({
+  const [debouncedSearch, search, setSearch] = useSearchDebounce(packageName, {
+    wait: 500,
+    minLength: 3,
+  })
+
+  const { handleSubmit } = useForm<SearchFormSchema>({
     defaultValues: {
-      search: packageName ?? '',
+      search: search ?? '',
     },
   })
 
   const { data: resultPackages } = useQuery({
-    queryKey: ['packages', packageName],
-    queryFn: () => getPackages({ text: packageName }),
+    queryKey: ['packages', debouncedSearch],
+    queryFn: () => getPackages({ text: debouncedSearch }),
   })
 
   function handleRedirect(packageName: string, version: string) {
@@ -39,12 +47,10 @@ export function Home() {
     })
   }
 
-  function handleFilter({ search }: SearchFormSchema) {
-    if (search !== '' && search.length < 3) return
-
+  function handleFilter() {
     setSearchParams((state) => {
-      if (search) {
-        state.set('packageName', search)
+      if (debouncedSearch) {
+        state.set('packageName', debouncedSearch)
       } else {
         state.delete('packageName')
       }
@@ -70,15 +76,18 @@ export function Home() {
           id="search"
           className="w-full font-mono"
           placeholder="> type package name here"
-          {...register('search')}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
         <ul
           hidden={!resultPackages || resultPackages.total <= 0}
           className="absolute top-full z-10 mt-4 max-h-60 w-full overflow-auto rounded-lg border border-zinc-200 shadow-sm dark:border-zinc-500"
         >
           {resultPackages?.objects.map((item, index) => {
-            const packageName = item.package.name
-            const version = item.package.version
+            const packageName = item?.package?.name ?? ''
+            const version = item?.package?.version ?? ''
+            const publisher = item?.package?.publisher?.username ?? ''
+            const description = item?.package?.description ?? ''
 
             return (
               <li
@@ -90,18 +99,16 @@ export function Home() {
                 <div className="flex w-full flex-col">
                   <div className="flex flex-row items-baseline gap-2">
                     <span className="font-mono font-semibold">
-                      {item.package.name}
+                      {packageName}
                     </span>
-                    <span className="text-xs text-[#E4434C]">
-                      @{item.package.publisher.username}
-                    </span>
+                    <span className="text-xs text-[#E4434C]">@{publisher}</span>
                   </div>
                   <span className="text-xs text-muted-foreground">
-                    {item.package.description}
+                    {description}
                   </span>
                 </div>
 
-                <div className="text-xs">@{item.package.version}</div>
+                <div className="text-xs">@{version}</div>
               </li>
             )
           })}

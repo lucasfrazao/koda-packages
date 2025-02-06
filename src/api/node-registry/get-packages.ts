@@ -26,10 +26,12 @@ interface GetPackagesResponse {
 }
 
 export interface GetPackagesBody {
-  text: string | null
+  text?: string
 }
 
 export async function getPackages({ text }: GetPackagesBody) {
+  if (!text) return
+
   return callNodeRegistryApi<GetPackagesResponse>({
     url: '/-/v1/search',
     method: 'GET',
